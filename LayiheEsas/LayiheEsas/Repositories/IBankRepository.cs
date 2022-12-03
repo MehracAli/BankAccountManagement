@@ -12,10 +12,12 @@ namespace LayiheEsas.Repositories
         public Bank bank { get; }
 
         public void CheckBalance(User user);
-        public void TopUpBalance(Bank bank);
-        public void ChangePassword(Bank bank);
-        public void BankUserList(Bank bank);
-        public void BlockUser(Bank bank);
+        public void TopUpBalance(User user);
+        public string ChangePassword(User user);
+        public void BankUserList(User user);
+        public void BlockUser(User user);
+
+        public void Logout(Bank bank);
 
     }
 }

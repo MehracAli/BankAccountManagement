@@ -17,21 +17,29 @@ namespace LayiheEsas.Repositories
             _bank = new Bank();         
         }
 
+        #region UserRegistration
         public void UserRegistration(User user)
         {
             Array.Resize(ref bank.Users, bank.Users.Length + 1);
             bank.Users[bank.Users.Length - 1] = user;
         }
 
-        public void UserLogin(User user) 
+        #endregion
+
+        #region UserLogin
+        public void UserLogin(User user)
         {
             user.IsLogged = true;
+            Console.WriteLine("Is logged");
             Console.WriteLine($"Name: {user.Name}; Surname: {user.Surname}");
         }
+        #endregion
 
+        #region FindUser
         public void FindUser(User user)
         {
             Console.WriteLine($"Name: {user.Name}; Surname: {user.Surname}");
-        }
+        } 
+        #endregion
     }
 }

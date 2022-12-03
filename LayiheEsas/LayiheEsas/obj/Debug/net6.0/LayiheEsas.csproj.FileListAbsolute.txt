@@ -1,0 +1,15 @@
+D:\C#\Layihe\LayiheEsas\LayiheEsas\bin\Debug\net6.0\LayiheEsas.exe
+D:\C#\Layihe\LayiheEsas\LayiheEsas\bin\Debug\net6.0\LayiheEsas.deps.json
+D:\C#\Layihe\LayiheEsas\LayiheEsas\bin\Debug\net6.0\LayiheEsas.runtimeconfig.json
+D:\C#\Layihe\LayiheEsas\LayiheEsas\bin\Debug\net6.0\LayiheEsas.dll
+D:\C#\Layihe\LayiheEsas\LayiheEsas\bin\Debug\net6.0\LayiheEsas.pdb
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\LayiheEsas.csproj.AssemblyReference.cache
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\LayiheEsas.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\LayiheEsas.AssemblyInfoInputs.cache
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\LayiheEsas.AssemblyInfo.cs
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\LayiheEsas.csproj.CoreCompileInputs.cache
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\LayiheEsas.dll
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\refint\LayiheEsas.dll
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\LayiheEsas.pdb
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\LayiheEsas.genruntimeconfig.cache
+D:\C#\Layihe\LayiheEsas\LayiheEsas\obj\Debug\net6.0\ref\LayiheEsas.dll

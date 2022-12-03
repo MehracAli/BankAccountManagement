@@ -25,6 +25,7 @@ namespace LayiheEsas.Services
             {
                 if (userList.Email.Equals(email))
                 {
+                    Console.WriteLine("This email was registered.");
                     goto start;
                 }
             }
@@ -52,7 +53,7 @@ namespace LayiheEsas.Services
         #endregion
 
         #region FindUser
-        public User FindUser(string email)
+        public bool FindUser(string email)
         {
             User user = null;
 
@@ -61,10 +62,11 @@ namespace LayiheEsas.Services
                 if (userList.Email.Equals(email))
                 {
                     user = userList;
+                    return true;
                 }
             }
             userRepository.FindUser(user);
-            return user;
+            return false;
         } 
         #endregion
 

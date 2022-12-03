@@ -17,29 +17,35 @@ namespace LayiheEsas.Repositories
             _bank = new Bank();
         }
 
-        public void BankUserList(Bank bank)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void BlockUser(Bank bank)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ChangePassword(Bank bank)
-        {
-            throw new NotImplementedException();
-        }
-
         public void CheckBalance(User user)
         {
             Console.WriteLine(user.Balance);
         }
 
-        public void TopUpBalance(Bank bank)
+        public void TopUpBalance(User user)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(user.Balance);
         }
+        public string ChangePassword(User user)
+        {
+            return user.Password;
+        }
+        public void BankUserList(User user)
+        {
+            foreach (User userList in _bank.Users)
+            {
+                Console.WriteLine($"Name: {userList.Name}; Surname: {userList.Surname}");
+            }
+        }
+
+        public void BlockUser(User user)
+        {
+            Console.WriteLine($"User: {user.Name} {user.Surname} is blocked!");
+        }
+        public void Logout(Bank bank)
+        {
+            
+        }
+
     }
 }

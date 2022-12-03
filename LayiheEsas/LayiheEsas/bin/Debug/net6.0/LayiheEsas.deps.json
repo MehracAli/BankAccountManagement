@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "LayiheEsas/1.0.0": {
+        "runtime": {
+          "LayiheEsas.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "LayiheEsas/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

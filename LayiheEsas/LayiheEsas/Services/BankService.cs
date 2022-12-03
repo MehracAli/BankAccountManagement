@@ -17,11 +17,12 @@ namespace LayiheEsas.Services
             _bankRepository = new BankRepository();
         }
 
-        public bool CheckBalance(int id)
+        #region CheckBalance
+        public bool CheckBalance(string password)
         {
-            foreach(User userList in _bankRepository.bank.Users) 
-            { 
-                if (userList.Id == id)
+            foreach (User userList in _bankRepository.bank.Users)
+            {
+                if (userList.Password == password)
                 {
                     _bankRepository.CheckBalance(userList);
                     return true;
@@ -29,12 +30,79 @@ namespace LayiheEsas.Services
             }
             return false;
         }
+        #endregion
 
-        public void TopUpBalance(User user, double newBalance)
+        #region TopUpBalance
+        public bool TopUpBalance(string password, double newBalance)
         {
-            
+            foreach (User userList in _bankRepository.bank.Users)
+            {
+                if (userList.Password == password)
+                {
+                    userList.Balance = newBalance;
+                    _bankRepository.TopUpBalance(userList);
+                    return true;
+                }
+            }
+            return false;
         }
+        #endregion
 
+        #region ChangePassword
+        public bool ChangePassword(string email, string currentPassword, string newPassword)
+        {
+            foreach (User userList in _bankRepository.bank.Users)
+            {
+                if (userList.Email == email && userList.Password == currentPassword)
+                {
+                    userList.Password = newPassword;
+                    _bankRepository.ChangePassword(userList);
+                    return true;
+                }
+            }
+            return false;
+        }
+        #endregion
+
+        #region BankUserList
+        public bool BankUserList(string email)
+        {
+            foreach(User userList in _bankRepository.bank.Users)
+            {
+                if(userList.Email == email)
+                {
+                    if(userList.IsAdmin == true)
+                    {
+                        _bankRepository.BankUserList(userList);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        #endregion
+
+        #region BlockUser
+        public bool BlockUser(string email)
+        {
+            foreach (User userList in _bankRepository.bank.Users)
+            {
+                if(userList.Email == email)
+                {
+                    userList.IsBlocked = true;
+                    return true;                  
+                }
+            }
+            return true;
+        }
+        #endregion
+
+        #region Logout
+        public void Logout()
+        {
+
+        } 
+        #endregion
     }
 
 }
