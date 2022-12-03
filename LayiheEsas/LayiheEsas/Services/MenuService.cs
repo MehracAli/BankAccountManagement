@@ -28,7 +28,6 @@ namespace LayiheEsas.Services
             string email;
             string password;
             bool isAdmin = false;
-            string Admin = null;
 
             do
             {
@@ -39,21 +38,26 @@ namespace LayiheEsas.Services
 
             do
             {
+                Console.WriteLine(" ");
                 Console.WriteLine("Please enter surname");
                 surname = Console.ReadLine();
             } while (!CheckNameSurname(surname));
             do
             {
+                Console.WriteLine(" ");
                 Console.WriteLine("Please enter email");
                 email = Console.ReadLine();
             } while (!CheckEmail(email) == true);
 
             do
             {
+                Console.WriteLine(" ");
                 Console.WriteLine("Please enter password");
                 password = Console.ReadLine();
             } while (!CheckPassword(password) == true);
 
+            string Admin = null;
+            Console.WriteLine(" ");
             Console.WriteLine("Are you super admin Yes/No");
             Admin = Console.ReadLine();
 
@@ -77,7 +81,7 @@ namespace LayiheEsas.Services
             string password;
             do
             {
-                Console.WriteLine("Login here: ");
+                Console.WriteLine("Login here: \n");
                 Console.WriteLine("Enter Email");
                 email = Console.ReadLine();
                 Console.WriteLine("Enter Password");
@@ -183,11 +187,10 @@ namespace LayiheEsas.Services
             {
                 return true;
             }
-            Console.WriteLine("Name or surname must contain minimum 3 characters:");
+            Console.WriteLine("--> Name or surname must contain minimum 3 characters:");
             return false;
         }
         #endregion
-
 
         #region CheckPassword
         public static bool CheckPassword(string password)
@@ -220,9 +223,9 @@ namespace LayiheEsas.Services
                     return true;
                 }
             }
-            Console.WriteLine("Enter valid password");
-            return result;
-        }
+            Console.WriteLine("--> Enter valid password");
+            return false;
+        } 
         #endregion
 
         #region CheckEmail
@@ -232,7 +235,7 @@ namespace LayiheEsas.Services
             {
                 return true;
             }
-            Console.WriteLine("Email must contain @ symbol");
+            Console.WriteLine("--> Email must contain '@' symbol");
             return false;
         }
         #endregion

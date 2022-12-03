@@ -22,6 +22,8 @@ namespace LayiheEsas.Repositories
         {
             Array.Resize(ref bank.Users, bank.Users.Length + 1);
             bank.Users[bank.Users.Length - 1] = user;
+            Console.WriteLine("You are registered");
+            Thread.Sleep(3000);
         }
 
         #endregion
@@ -30,15 +32,16 @@ namespace LayiheEsas.Repositories
         public void UserLogin(User user)
         {
             user.IsLogged = true;
-            Console.WriteLine("Is logged");
-            Console.WriteLine($"Name: {user.Name}; Surname: {user.Surname}");
+            Console.WriteLine($"User: {user.Name} {user.Surname} is logged!");
+            Thread.Sleep(3000);
         }
         #endregion
 
         #region FindUser
         public void FindUser(User user)
         {
-            Console.WriteLine($"Name: {user.Name}; Surname: {user.Surname}");
+            Console.WriteLine($"User fined: {user.Name} {user.Surname}");
+            Thread.Sleep(3000);
         } 
         #endregion
     }

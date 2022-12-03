@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\Layihe\\LayiheEsas\\LayiheEsas\\LayiheEsas.csproj",
+      "projectUniqueName": "C:\\Users\\Mehrac\\Documents\\Layihe\\C-Layihe-\\LayiheEsas\\LayiheEsas\\LayiheEsas.csproj",
       "projectName": "LayiheEsas",
-      "projectPath": "D:\\C#\\Layihe\\LayiheEsas\\LayiheEsas\\LayiheEsas.csproj",
+      "projectPath": "C:\\Users\\Mehrac\\Documents\\Layihe\\C-Layihe-\\LayiheEsas\\LayiheEsas\\LayiheEsas.csproj",
       "packagesPath": "C:\\Users\\Mehrac\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\Layihe\\LayiheEsas\\LayiheEsas\\obj\\",
+      "outputPath": "C:\\Users\\Mehrac\\Documents\\Layihe\\C-Layihe-\\LayiheEsas\\LayiheEsas\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -18,20 +18,21 @@ namespace LayiheEsas.Services
         }
 
         #region UserRegister
-        public User UserRegistration(string name, string surname, string email, string password, bool isAdmin)
+        public bool UserRegistration(string name, string surname, string email, string password, bool isAdmin)
         {
-        start:
             foreach (User userList in userRepository.bank.Users)
             {
-                if (userList.Email.Equals(email))
+                if (userList.Email == email)
                 {
-                    Console.WriteLine("This email was registered.");
-                    goto start;
+                Console.WriteLine(" ");
+                Console.WriteLine("This email was registered");
+                MenuService.UserRegistration();
+                return false;
                 }
             }
             User user = new User(name, surname, email, password, isAdmin);
             userRepository.UserRegistration(user);
-            return user;
+            return true;
         }
         #endregion
 
@@ -55,17 +56,15 @@ namespace LayiheEsas.Services
         #region FindUser
         public bool FindUser(string email)
         {
-            User user = null;
 
             foreach (User userList in userRepository.bank.Users)
             {
                 if (userList.Email.Equals(email))
                 {
-                    user = userList;
+                    userRepository.FindUser(userList);
                     return true;
                 }
             }
-            userRepository.FindUser(user);
             return false;
         } 
         #endregion
