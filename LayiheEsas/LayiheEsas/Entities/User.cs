@@ -40,6 +40,8 @@ namespace LayiheEsas.Entities
 
         public User()
         {
+            count= 10;
+            Id = ++count;
             IsAdmin = false;
             IsBlocked = false;
             IsLogged = false;

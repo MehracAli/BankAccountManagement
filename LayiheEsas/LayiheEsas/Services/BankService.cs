@@ -10,11 +10,11 @@ namespace LayiheEsas.Services
 {
     internal class BankService
     {
-        readonly IBankRepository _bankRepository;
+        public IBankRepository _bankRepository;
 
-        public BankService()
+        public BankService(Bank bank)
         {
-            _bankRepository = new BankRepository();
+            _bankRepository = new BankRepository(bank);
         }
 
         #region CheckBalance
@@ -58,6 +58,12 @@ namespace LayiheEsas.Services
                     userList.Password = newPassword;
                     _bankRepository.ChangePassword(userList);
                     return true;
+                }
+                else
+                {
+                    Console.WriteLine("Wrong password");
+                    Thread.Sleep(2000);
+                    return false;
                 }
             }
             return false;

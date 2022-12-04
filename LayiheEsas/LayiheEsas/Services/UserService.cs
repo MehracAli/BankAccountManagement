@@ -12,9 +12,9 @@ namespace LayiheEsas.Services
     {
         public IUserRepository userRepository;
 
-        public UserService()
+        public UserService(Bank bank)
         {
-            userRepository = new UserRepository();
+            userRepository = new UserRepository(bank);
         }
 
         #region UserRegister
@@ -25,9 +25,8 @@ namespace LayiheEsas.Services
                 if (userList.Email == email)
                 {
                 Console.WriteLine(" ");
-                Console.WriteLine("-->This email was registered!");
+                Console.WriteLine("-->This email was register!");
                 Thread.Sleep(3000);
-                Console.Clear();
                 return false;
                 }
             }
@@ -50,7 +49,7 @@ namespace LayiheEsas.Services
                     return true;
                 }
             }
-            Console.WriteLine("You aren't registered!");
+            Console.WriteLine("You didn't registered!");
             Thread.Sleep(3000);
             return false;
         } 

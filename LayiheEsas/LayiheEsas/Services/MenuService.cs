@@ -11,11 +11,13 @@ namespace LayiheEsas.Services
     {
         readonly static BankService bankService;
         readonly static UserService userService;
+        static Bank myBank;
 
         static MenuService()
         {
-            bankService = new BankService();
-            userService = new UserService();
+            myBank= new Bank();
+            bankService = new BankService(myBank);
+            userService = new UserService(myBank);
         }
 
         #region UserRegistration
@@ -54,11 +56,11 @@ namespace LayiheEsas.Services
                 password = Console.ReadLine();
             } while (!CheckPassword(password) == true);
 
-            start:
             string Admin = null;
             Console.WriteLine(" ");
-            Console.WriteLine("Are you super admin yes/no:");
+            Console.WriteLine("Are you super admin yes/no:");          
             Admin = Console.ReadLine();
+
             if (Admin == "yes")
             {
                 isAdmin = true;
@@ -66,13 +68,6 @@ namespace LayiheEsas.Services
             else if (Admin == "no")
             {
                 isAdmin = false;
-            }
-
-            if(Admin != "yes" || Admin != "no")
-            {
-                Console.WriteLine(" ");
-                Console.WriteLine("-->Please choose your status");
-                goto start;
             }
 
             userService.UserRegistration(name, surname, email, password, isAdmin);
@@ -121,7 +116,8 @@ namespace LayiheEsas.Services
             email = Console.ReadLine();
             if (bankService.CheckBalance(email))
             {
-
+                Console.WriteLine("Loading...");
+                Thread.Sleep(1500);
             }
         }
         #endregion
@@ -138,6 +134,8 @@ namespace LayiheEsas.Services
                 Console.WriteLine("Enter balance: ");
                 newBalance = Convert.ToInt32(Console.ReadLine());
             } while (!bankService.TopUpBalance(password, newBalance));
+            Console.WriteLine("Loading...");
+            Thread.Sleep(1500);
         }
         #endregion
 
@@ -149,10 +147,13 @@ namespace LayiheEsas.Services
             string newPassword;
             do
             {
+            Console.WriteLine("Please enter your email:");
                 email = Console.ReadLine();
+            Console.WriteLine("Please enter current password:");
                 currentPassword = Console.ReadLine();
+            Console.WriteLine("Please enter new password");
                 newPassword = Console.ReadLine();
-            } while (bankService.ChangePassword(email, currentPassword, newPassword));
+            } while (!bankService.ChangePassword(email, currentPassword, newPassword));
         }
         #endregion
 

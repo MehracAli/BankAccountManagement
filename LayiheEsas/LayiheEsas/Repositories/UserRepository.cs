@@ -12,9 +12,9 @@ namespace LayiheEsas.Repositories
         readonly Bank _bank;
         public Bank bank {get { return _bank;}}
 
-        public UserRepository()
+        public UserRepository(Bank bank)
         {
-            _bank = new Bank();         
+            _bank = bank;         
         }
 
         #region UserRegistration
@@ -36,6 +36,7 @@ namespace LayiheEsas.Repositories
             Console.WriteLine("Is logged!");
             Console.WriteLine(" ");
             Console.WriteLine($"User: {user.Name} {user.Surname} is logged!");
+            Console.WriteLine($"Status: {user.IsAdmin}");
             Console.WriteLine($"ID: {user.Id}");
             Thread.Sleep(3000);
         }
