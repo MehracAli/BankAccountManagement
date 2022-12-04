@@ -28,7 +28,7 @@ namespace LayiheEsas.Services
                     return true;
                 }
             }
-            return false;
+            return true;
         }
         #endregion
 
@@ -39,12 +39,12 @@ namespace LayiheEsas.Services
             {
                 if (userList.Password == password)
                 {
-                    userList.Balance = newBalance;
+                    userList.Balance += newBalance;
                     _bankRepository.TopUpBalance(userList);
                     return true;
                 }
             }
-            return false;
+            return true;
         }
         #endregion
 
@@ -100,7 +100,6 @@ namespace LayiheEsas.Services
         #region Logout
         public void Logout()
         {
-
         } 
         #endregion
     }

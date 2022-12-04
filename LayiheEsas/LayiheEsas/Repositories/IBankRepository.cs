@@ -13,7 +13,7 @@ namespace LayiheEsas.Repositories
 
         public void CheckBalance(User user);
         public void TopUpBalance(User user);
-        public string ChangePassword(User user);
+        public void ChangePassword(User user);
         public void BankUserList(User user);
         public void BlockUser(User user);
 

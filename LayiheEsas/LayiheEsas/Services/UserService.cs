@@ -25,8 +25,9 @@ namespace LayiheEsas.Services
                 if (userList.Email == email)
                 {
                 Console.WriteLine(" ");
-                Console.WriteLine("This email was registered");
-                MenuService.UserRegistration();
+                Console.WriteLine("-->This email was registered!");
+                Thread.Sleep(3000);
+                Console.Clear();
                 return false;
                 }
             }
@@ -45,11 +46,13 @@ namespace LayiheEsas.Services
                 if (userList.Email.Equals(email) && userList.Password.Equals(password))
                 {
                     userRepository.UserLogin(userList);
+                    MenuService.BankService();
                     return true;
                 }
             }
-
-            return false;
+            Console.WriteLine("You aren't registered!");
+            Thread.Sleep(3000);
+            return true;
         } 
         #endregion
 
@@ -65,6 +68,9 @@ namespace LayiheEsas.Services
                     return true;
                 }
             }
+            Console.WriteLine(" ");
+            Console.WriteLine("User not found...");
+            Thread.Sleep(3000);
             return false;
         } 
         #endregion
