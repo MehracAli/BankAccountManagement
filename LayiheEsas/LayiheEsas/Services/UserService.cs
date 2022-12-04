@@ -25,7 +25,7 @@ namespace LayiheEsas.Services
                 if (userList.Email == email)
                 {
                 Console.WriteLine(" ");
-                Console.WriteLine("-->This email was register!");
+                Console.WriteLine("-->This email is already registered...");
                 Thread.Sleep(3000);
                 return false;
                 }
@@ -39,7 +39,6 @@ namespace LayiheEsas.Services
         #region UserLogin
         public bool UserLogin(string email, string password)
         {
-
             foreach (User userList in userRepository.bank.Users)
             {
                 if (userList.Email.Equals(email) && userList.Password.Equals(password))
@@ -49,7 +48,7 @@ namespace LayiheEsas.Services
                     return true;
                 }
             }
-            Console.WriteLine("You didn't registered!");
+            Console.WriteLine("--> You are not registered...");
             Thread.Sleep(3000);
             return false;
         } 

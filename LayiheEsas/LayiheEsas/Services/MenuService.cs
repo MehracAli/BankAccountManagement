@@ -27,7 +27,7 @@ namespace LayiheEsas.Services
             string surname;
             string email;
             string password;
-            bool isAdmin = false;
+            bool isAdmin;
 
             do
             {
@@ -56,55 +56,58 @@ namespace LayiheEsas.Services
                 password = Console.ReadLine();
             } while (!CheckPassword(password) == true);
 
+
             string Admin = null;
+            char yesOrno;
+            start:
+            do
+            {
             Console.WriteLine(" ");
-            Console.WriteLine("Are you super admin yes/no:");          
-            Admin = Console.ReadLine();
+            Console.WriteLine("Are you admin?: y(yes) or n(no)");
+            isAdmin = char.TryParse(Console.ReadLine(), out yesOrno);
+            } while (!isAdmin);
 
-            if (Admin == "yes")
+            if (yesOrno.ToString().ToLower() == 'y'.ToString())
             {
-                isAdmin = true;
+                userService.UserRegistration(name, surname, email, password, true);
             }
-            else if (Admin == "no")
+            else if(yesOrno.ToString().ToLower() == 'n'.ToString())
             {
-                isAdmin = false;
+                userService.UserRegistration(name, surname, email, password, false);
+            }
+            else
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine("-->You can enter only 'y' or 'n'...");
+                goto start;
             }
 
-            userService.UserRegistration(name, surname, email, password, isAdmin);
         }
         #endregion
 
         #region UserLogin
-        public static bool UserLogin()
+        public static void UserLogin()
         {
             string email;
             string password;
             Console.WriteLine("Login here: \n");
-            Console.WriteLine("Enter Email:");
+            Console.WriteLine("Enter email:");
             email = Console.ReadLine();
             Console.WriteLine(" ");
-            Console.WriteLine("Enter Password:");
+            Console.WriteLine("Enter password:");
             password = Console.ReadLine();
 
-            if (userService.UserLogin(email, password))
-            {
-                return true;
-            }
-                return false;
+            userService.UserLogin(email, password);
         }
         #endregion
 
         #region FindUser
-        public static bool FindUser()
+        public static void FindUser()
         {
             string email;
             Console.WriteLine("Enter email for find user:");
             email = Console.ReadLine();
-            if (userService.FindUser(email))
-            {
-                return true;
-            }
-            return false;
+            userService.FindUser(email);
         }
         #endregion
 
@@ -114,11 +117,7 @@ namespace LayiheEsas.Services
             string email;
             Console.WriteLine("Enter password: ");
             email = Console.ReadLine();
-            if (bankService.CheckBalance(email))
-            {
-                Console.WriteLine("Loading...");
-                Thread.Sleep(1500);
-            }
+            bankService.CheckBalance(email);
         }
         #endregion
 
@@ -161,11 +160,15 @@ namespace LayiheEsas.Services
         public static void BankUserList()
         {
             string email;
-            do
-            {
+            
                 Console.WriteLine("Enter email for show userlist");
                 email = Console.ReadLine();
-            } while (!bankService.BankUserList(email));
+
+            if (bankService.BankUserList(email))
+            {
+                Console.WriteLine("Userlist");
+                Thread.Sleep(1500);
+            }
         }
         #endregion
 
@@ -199,7 +202,7 @@ namespace LayiheEsas.Services
             {
                 return true;
             }
-            Console.WriteLine("--> Name or surname must contain minimum 3 characters.\n");
+            Console.WriteLine("--> Name or surname must be at least 3 characters long.\n");
             return false;
         }
         #endregion
@@ -214,7 +217,7 @@ namespace LayiheEsas.Services
 
             if (password.Length < 8)
             {
-                Console.WriteLine("--> Password must contain minimum 8 character.\n");
+                Console.WriteLine("--> Passüord must be at least 8 characters long.\n");
                 return false;
             }
 
@@ -240,7 +243,7 @@ namespace LayiheEsas.Services
                 }
             }
 
-            Console.WriteLine("--> Password must contain a upper, lower letters and a digit.\n");
+            Console.WriteLine("--> password must contain at least 1 lowercase letter, 1 uppercase letter and at least 1 number.\n");
             return false;
         } 
         #endregion
@@ -252,9 +255,7 @@ namespace LayiheEsas.Services
             {
                 return true;
             }
-            Console.WriteLine("--> Email must contain '@' symbol.\n");
-            Thread.Sleep(1500);
-            Console.Clear();
+            Console.WriteLine("--> The email must contain the @ symbol.\n");
             return false;
         }
         #endregion
@@ -315,6 +316,7 @@ namespace LayiheEsas.Services
         }
         #endregion
 
+
         #region UserService
         public static void UserService()
         {
@@ -354,5 +356,7 @@ namespace LayiheEsas.Services
             } while (UserServiceSelection != '0');
         }
         #endregion
+        
+
     }
 }

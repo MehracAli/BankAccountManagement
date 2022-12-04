@@ -23,7 +23,7 @@ namespace LayiheEsas.Repositories
             Array.Resize(ref bank.Users, bank.Users.Length + 1);
             bank.Users[bank.Users.Length - 1] = user;
             Console.WriteLine(" ");
-            Console.WriteLine("You are registered!");
+            Console.WriteLine("You have successfully registered!");
             Thread.Sleep(3000);
         }
 
@@ -33,12 +33,10 @@ namespace LayiheEsas.Repositories
         public void UserLogin(User user)
         {
             user.IsLogged = true;
-            Console.WriteLine("Is logged!");
-            Console.WriteLine(" ");
-            Console.WriteLine($"User: {user.Name} {user.Surname} is logged!");
-            Console.WriteLine($"Status: {user.IsAdmin}");
+            Console.WriteLine("You are successfully logged in!\n");
+            Console.WriteLine($"User: {user.Name} {user.Surname}");
+            Console.WriteLine($"IsAdmin status: {user.IsAdmin}");
             Console.WriteLine($"ID: {user.Id}");
-            Thread.Sleep(3000);
         }
         #endregion
 

@@ -48,7 +48,7 @@ namespace LayiheEsas.Repositories
         {
             foreach (User userList in _bank.Users)
             {
-                Console.WriteLine($"Name: {userList.Name}; Surname: {userList.Surname}");
+                Console.WriteLine($"Name Surname: {userList.Name} {userList.Surname}");
                 Thread.Sleep(2000);
             }
         }
