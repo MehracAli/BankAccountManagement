@@ -18,7 +18,6 @@ namespace LayiheEsas.Services
             userService = new UserService();
         }
 
-
         #region UserRegistration
         public static void UserRegistration()
         {
@@ -55,11 +54,11 @@ namespace LayiheEsas.Services
                 password = Console.ReadLine();
             } while (!CheckPassword(password) == true);
 
+            start:
             string Admin = null;
             Console.WriteLine(" ");
             Console.WriteLine("Are you super admin yes/no:");
             Admin = Console.ReadLine();
-
             if (Admin == "yes")
             {
                 isAdmin = true;
@@ -67,6 +66,13 @@ namespace LayiheEsas.Services
             else if (Admin == "no")
             {
                 isAdmin = false;
+            }
+
+            if(Admin != "yes" || Admin != "no")
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine("-->Please choose your status");
+                goto start;
             }
 
             userService.UserRegistration(name, surname, email, password, isAdmin);
@@ -78,47 +84,45 @@ namespace LayiheEsas.Services
         {
             string email;
             string password;
-            do
-            {
-                Console.WriteLine("Login here: \n");
-                Console.WriteLine("Enter Email:");
-                email = Console.ReadLine();
-                Console.WriteLine(" ");
-                Console.WriteLine("Enter Password:");
-                password = Console.ReadLine();
-            } while (!userService.UserLogin(email, password));
+            Console.WriteLine("Login here: \n");
+            Console.WriteLine("Enter Email:");
+            email = Console.ReadLine();
+            Console.WriteLine(" ");
+            Console.WriteLine("Enter Password:");
+            password = Console.ReadLine();
 
-            return true;
+            if (userService.UserLogin(email, password))
+            {
+                return true;
+            }
+                return false;
         }
         #endregion
 
         #region FindUser
-        public static void FindUser()
+        public static bool FindUser()
         {
             string email;
-            
-            do
+            Console.WriteLine("Enter email for find user:");
+            email = Console.ReadLine();
+            if (userService.FindUser(email))
             {
-                Console.WriteLine("Enter email for find user:");
-                email = Console.ReadLine();
-
-            } while (userService.FindUser(email));
+                return true;
+            }
+            return false;
         }
         #endregion
-
-        
-
-
 
         #region CheckBalance
         public static void CheckBalance()
         {
-            string password;
-            do
+            string email;
+            Console.WriteLine("Enter password: ");
+            email = Console.ReadLine();
+            if (bankService.CheckBalance(email))
             {
-                Console.WriteLine("Enter password: ");
-                password = Console.ReadLine();
-            } while (!bankService.CheckBalance(password));
+
+            }
         }
         #endregion
 
@@ -194,9 +198,7 @@ namespace LayiheEsas.Services
             {
                 return true;
             }
-            Console.WriteLine("--> Name or surname must contain minimum 3 characters:");
-            Thread.Sleep(1500);
-            Console.Clear();
+            Console.WriteLine("--> Name or surname must contain minimum 3 characters.\n");
             return false;
         }
         #endregion
@@ -209,10 +211,14 @@ namespace LayiheEsas.Services
             bool hasUpper = false;
             bool result = false;
 
+            if (password.Length < 8)
+            {
+                Console.WriteLine("--> Password must contain minimum 8 character.\n");
+                return false;
+            }
+
             foreach (char characters in password)
             {
-
-
                 if (char.IsDigit(characters))
                 {
                     hasDigit = true;
@@ -232,9 +238,8 @@ namespace LayiheEsas.Services
                     return true;
                 }
             }
-            Console.WriteLine("--> Enter valid password");
-            Thread.Sleep(1500);
-            Console.Clear();
+
+            Console.WriteLine("--> Password must contain a upper, lower letters and a digit.\n");
             return false;
         } 
         #endregion
@@ -246,7 +251,7 @@ namespace LayiheEsas.Services
             {
                 return true;
             }
-            Console.WriteLine("--> Email must contain '@' symbol");
+            Console.WriteLine("--> Email must contain '@' symbol.\n");
             Thread.Sleep(1500);
             Console.Clear();
             return false;

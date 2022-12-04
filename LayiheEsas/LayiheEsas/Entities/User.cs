@@ -23,21 +23,23 @@ namespace LayiheEsas.Entities
 
         string _password;
         public string Password { get { return _password; } set { _password = value; } }
-       
-        public int Id;
+        int _id;
+        public int Id { get { return _id; } set { _id = ++count;} }
         public double Balance;
         public bool IsAdmin, IsBlocked, IsLogged;
         static int count;
+        
         public User(string name, string surname, string email, string password, bool isAdmin)
         {
             Name = name;
             Surname = surname;
             Email = email;
             Password = password;
-
-            Id = ++count;
             Balance = default;
+        }
 
+        public User()
+        {
             IsAdmin = false;
             IsBlocked = false;
             IsLogged = false;

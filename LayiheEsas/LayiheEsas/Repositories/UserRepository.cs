@@ -36,6 +36,7 @@ namespace LayiheEsas.Repositories
             Console.WriteLine("Is logged!");
             Console.WriteLine(" ");
             Console.WriteLine($"User: {user.Name} {user.Surname} is logged!");
+            Console.WriteLine($"ID: {user.Id}");
             Thread.Sleep(3000);
         }
         #endregion

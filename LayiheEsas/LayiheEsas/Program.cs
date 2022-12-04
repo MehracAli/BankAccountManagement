@@ -7,7 +7,7 @@ namespace LayiheEsas
     {
         static void Main(string[] args)
         {
-            MenuService.UserService();            
+            MenuService.UserService();
         }
     }
 }

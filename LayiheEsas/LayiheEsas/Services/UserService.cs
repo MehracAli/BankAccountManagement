@@ -52,7 +52,7 @@ namespace LayiheEsas.Services
             }
             Console.WriteLine("You aren't registered!");
             Thread.Sleep(3000);
-            return true;
+            return false;
         } 
         #endregion
 
