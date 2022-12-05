@@ -95,7 +95,12 @@ namespace LayiheEsas.Services
             Console.WriteLine("Enter password:");
             password = Console.ReadLine();
 
-            userService.UserLogin(email, password);
+            if (IsBlockedOrNo(email).Equals(false))
+            {
+                userService.UserLogin(email, password);
+            }
+                Console.WriteLine("You are blocekd!");
+                Thread.Sleep(1000);
         }
         #endregion
 
@@ -379,8 +384,24 @@ namespace LayiheEsas.Services
                 Thread.Sleep(1500);
             }
             return false;
-        } 
+        }
         #endregion
 
+        #region IsBlockedOrNo
+        public static bool IsBlockedOrNo(string email)
+        {
+            foreach (User userList in bankService._bankRepository.bank.Users)
+            {
+                if (userList.Email.Equals(email))
+                {
+                    if (userList.IsBlocked)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } 
+        #endregion
     }
 }
