@@ -44,6 +44,10 @@ namespace LayiheEsas.Repositories
         public void FindUser(User user)
         {
             Console.WriteLine($"User fined: {user.Name} {user.Surname}");
+            if(user.IsAdmin) 
+            {
+                Console.WriteLine("Admin");
+            }
             Thread.Sleep(3000);
         } 
         #endregion

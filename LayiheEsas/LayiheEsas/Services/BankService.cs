@@ -22,7 +22,7 @@ namespace LayiheEsas.Services
         {
             foreach (User userList in _bankRepository.bank.Users)
             {
-                if (userList.Password == password)
+                if (userList.Password.Equals(password))
                 {
                     _bankRepository.CheckBalance(userList);
                     return true;
@@ -33,18 +33,21 @@ namespace LayiheEsas.Services
         #endregion
 
         #region TopUpBalance
-        public bool TopUpBalance(string password, double newBalance)
+        public void TopUpBalance(string email, double newBalance)
         {
             foreach (User userList in _bankRepository.bank.Users)
             {
-                if (userList.Password == password)
+                if (userList.Email.Equals(email))
                 {
                     userList.Balance += newBalance;
                     _bankRepository.TopUpBalance(userList);
-                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("--> Incorrect email...");
+                    Thread.Sleep(3000);
                 }
             }
-            return true;
         }
         #endregion
 
@@ -55,16 +58,18 @@ namespace LayiheEsas.Services
             {
                 if (userList.Email == email && userList.Password == currentPassword)
                 {
-                    userList.Password = newPassword;
-                    _bankRepository.ChangePassword(userList);
+
+                    if ((MenuService.CheckPassword(newPassword)))
+                    {
+                        userList.Password = newPassword;
+                        _bankRepository.ChangePassword(userList);
+                    }       
+                    
                     return true;
                 }
-                else
-                {
-                    Console.WriteLine("Wrong password");
-                    Thread.Sleep(2000);
-                    return false;
-                }
+
+                Console.WriteLine("Wrong password");
+                Thread.Sleep(2000);
             }
             return false;
         }
@@ -89,14 +94,13 @@ namespace LayiheEsas.Services
         #endregion
 
         #region BlockUser
-        public bool BlockUser(string email)
+        public bool BlockUser(string userEmail, string adminEmail)
         {
             foreach (User userList in _bankRepository.bank.Users)
             {
-                if(userList.Email == email)
+                if(userList.Email.Equals(adminEmail))
                 {
-                    userList.IsBlocked = true;
-                    return true;                  
+                              
                 }
             }
             return true;

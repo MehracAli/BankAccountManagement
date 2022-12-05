@@ -22,7 +22,7 @@ namespace LayiheEsas.Services
         {
             foreach (User userList in userRepository.bank.Users)
             {
-                if (userList.Email == email)
+                if (userList.Email.Equals(email))
                 {
                 Console.WriteLine(" ");
                 Console.WriteLine("-->This email is already registered...");
@@ -37,7 +37,7 @@ namespace LayiheEsas.Services
         #endregion
 
         #region UserLogin
-        public bool UserLogin(string email, string password)
+        public void UserLogin(string email, string password)
         {
             foreach (User userList in userRepository.bank.Users)
             {
@@ -45,31 +45,26 @@ namespace LayiheEsas.Services
                 {
                     userRepository.UserLogin(userList);
                     MenuService.BankService();
-                    return true;
                 }
             }
             Console.WriteLine("--> You are not registered...");
             Thread.Sleep(3000);
-            return false;
         } 
         #endregion
 
         #region FindUser
-        public bool FindUser(string email)
+        public void FindUser(string email)
         {
-
             foreach (User userList in userRepository.bank.Users)
             {
                 if (userList.Email.Equals(email))
                 {
                     userRepository.FindUser(userList);
-                    return true;
                 }
             }
             Console.WriteLine(" ");
-            Console.WriteLine("User not found...");
-            Thread.Sleep(3000);
-            return false;
+            Console.WriteLine("Ending...");
+            Thread.Sleep(1500);
         } 
         #endregion
 

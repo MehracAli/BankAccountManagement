@@ -11,13 +11,13 @@ namespace LayiheEsas.Services
     {
         readonly static BankService bankService;
         readonly static UserService userService;
-        static Bank myBank;
+        static Bank bank;
 
         static MenuService()
         {
-            myBank= new Bank();
-            bankService = new BankService(myBank);
-            userService = new UserService(myBank);
+            bank = new Bank();
+            bankService = new BankService(bank);
+            userService = new UserService(bank);
         }
 
         #region UserRegistration
@@ -33,8 +33,7 @@ namespace LayiheEsas.Services
             {
                 Console.WriteLine("Please enter name:");
                 name = Console.ReadLine();
-                
-            } while (!CheckNameSurname(name) == true);
+            } while (!CheckNameSurname(name));
 
             do
             {
@@ -47,38 +46,37 @@ namespace LayiheEsas.Services
                 Console.WriteLine(" ");
                 Console.WriteLine("Please enter email:");
                 email = Console.ReadLine();
-            } while (!CheckEmail(email) == true);
+            } while (!CheckEmail(email));
 
             do
             {
                 Console.WriteLine(" ");
                 Console.WriteLine("Please enter password:");
                 password = Console.ReadLine();
-            } while (!CheckPassword(password) == true);
-
+            } while (!CheckPassword(password));
 
             string Admin = null;
-            char yesOrno;
-            start:
+            char yesNo;
+        start:
             do
             {
-            Console.WriteLine(" ");
-            Console.WriteLine("Are you admin?: y(yes) or n(no)");
-            isAdmin = char.TryParse(Console.ReadLine(), out yesOrno);
+                Console.WriteLine(" ");
+                Console.WriteLine("Are you admin?: y(yes) or n(no)");
+                isAdmin = char.TryParse(Console.ReadLine(), out yesNo);
             } while (!isAdmin);
 
-            if (yesOrno.ToString().ToLower() == 'y'.ToString())
+            if (yesNo.ToString().ToLower() == 'y'.ToString())
             {
                 userService.UserRegistration(name, surname, email, password, true);
             }
-            else if(yesOrno.ToString().ToLower() == 'n'.ToString())
+            else if (yesNo.ToString().ToLower().Equals('n'.ToString()))
             {
                 userService.UserRegistration(name, surname, email, password, false);
             }
             else
             {
                 Console.WriteLine(" ");
-                Console.WriteLine("-->You can enter only 'y' or 'n'...");
+                Console.WriteLine("--> You can enter only 'y' or 'n'...");
                 goto start;
             }
 
@@ -124,17 +122,25 @@ namespace LayiheEsas.Services
         #region TopUpBalance
         public static void TopUpBalance()
         {
-            string password;
+            string email;
             double newBalance;
-            do
+            
+            Console.WriteLine("Enter email:");
+            email = Console.ReadLine();
+            Console.WriteLine("Enter balance:");
+            bool result = double.TryParse(Console.ReadLine(), out newBalance);
+           
+            if (result)
             {
-                Console.WriteLine("Enter password: ");
-                password = Console.ReadLine();
-                Console.WriteLine("Enter balance: ");
-                newBalance = Convert.ToInt32(Console.ReadLine());
-            } while (!bankService.TopUpBalance(password, newBalance));
-            Console.WriteLine("Loading...");
-            Thread.Sleep(1500);
+                bankService.TopUpBalance(email, newBalance);
+                Console.WriteLine("Loading...");
+                Thread.Sleep(1500);
+            }
+            else
+            {
+                Console.WriteLine("--> Contain cant be a letter...");
+                Thread.Sleep(1500);
+            }
         }
         #endregion
 
@@ -146,11 +152,11 @@ namespace LayiheEsas.Services
             string newPassword;
             do
             {
-            Console.WriteLine("Please enter your email:");
+                Console.WriteLine("Please enter your email:");
                 email = Console.ReadLine();
-            Console.WriteLine("Please enter current password:");
+                Console.WriteLine("Please enter current password:");
                 currentPassword = Console.ReadLine();
-            Console.WriteLine("Please enter new password");
+                Console.WriteLine("Please enter new password");
                 newPassword = Console.ReadLine();
             } while (!bankService.ChangePassword(email, currentPassword, newPassword));
         }
@@ -160,15 +166,11 @@ namespace LayiheEsas.Services
         public static void BankUserList()
         {
             string email;
-            
-                Console.WriteLine("Enter email for show userlist");
-                email = Console.ReadLine();
 
-            if (bankService.BankUserList(email))
-            {
-                Console.WriteLine("Userlist");
-                Thread.Sleep(1500);
-            }
+            Console.WriteLine("Enter email for show userlist");
+            email = Console.ReadLine();
+
+            bankService.BankUserList(email);
         }
         #endregion
 
@@ -177,12 +179,12 @@ namespace LayiheEsas.Services
         {
             BankUserList();
 
-            string email;
-            do
-            {
-                Console.WriteLine("Choose a user email which you want to block");
-                email = Console.ReadLine();
-            } while (!bankService.BlockUser(email));
+            string adminEmail;
+            string userEmail;
+            Console.WriteLine("Enter admin email:");
+            adminEmail = Console.ReadLine();
+            Console.WriteLine("Enter user email you want to block");
+            userEmail = Console.ReadLine();
         }
         #endregion
 
@@ -190,7 +192,7 @@ namespace LayiheEsas.Services
         public static void Logout()
         {
             MenuService.UserService();
-        } 
+        }
         #endregion
 
         #region CheckMethods
@@ -218,6 +220,7 @@ namespace LayiheEsas.Services
             if (password.Length < 8)
             {
                 Console.WriteLine("--> Passüord must be at least 8 characters long.\n");
+                Thread.Sleep(1500);
                 return false;
             }
 
@@ -245,7 +248,7 @@ namespace LayiheEsas.Services
 
             Console.WriteLine("--> password must contain at least 1 lowercase letter, 1 uppercase letter and at least 1 number.\n");
             return false;
-        } 
+        }
         #endregion
 
         #region CheckEmail
@@ -356,7 +359,7 @@ namespace LayiheEsas.Services
             } while (UserServiceSelection != '0');
         }
         #endregion
-        
+
 
     }
 }
