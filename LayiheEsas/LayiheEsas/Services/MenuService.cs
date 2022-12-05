@@ -177,14 +177,19 @@ namespace LayiheEsas.Services
         #region BlockUser
         public static void BlockUser()
         {
-            BankUserList();
 
             string adminEmail;
-            string userEmail;
-            Console.WriteLine("Enter admin email:");
+            string userEmail = string.Empty;
+            string password;
+            Console.WriteLine("Enter admin email and password:\n");
+            Console.Write("Email: ");
             adminEmail = Console.ReadLine();
-            Console.WriteLine("Enter user email you want to block");
-            userEmail = Console.ReadLine();
+            Console.Write("Password: ");
+            password = Console.ReadLine();
+            if (IsAdminOrNo(adminEmail,password).Equals(true))
+            {
+                bankService.BlockUser(userEmail);
+            }
         }
         #endregion
 
@@ -360,6 +365,22 @@ namespace LayiheEsas.Services
         }
         #endregion
 
+        #region IsAdminOrNo
+        public static bool IsAdminOrNo(string email, string password)
+        {
+            foreach (User userList in bankService._bankRepository.bank.Users)
+            {
+                if (userList.Email.Equals(email) || userList.Password.Equals(password))
+                {
+                    return true;
+                }
+
+                Console.WriteLine("You aren't admin...");
+                Thread.Sleep(1500);
+            }
+            return false;
+        } 
+        #endregion
 
     }
 }

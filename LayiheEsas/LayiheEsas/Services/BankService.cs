@@ -94,16 +94,26 @@ namespace LayiheEsas.Services
         #endregion
 
         #region BlockUser
-        public bool BlockUser(string userEmail, string adminEmail)
+        public void BlockUser(string userEmail)
         {
+            foreach (User user in _bankRepository.bank.Users)
+            {
+                _bankRepository.BankUserList(user);
+                break;
+            }
+
+            Console.WriteLine("Enter user email which you want block:");
+            userEmail = Console.ReadLine();
+
             foreach (User userList in _bankRepository.bank.Users)
             {
-                if(userList.Email.Equals(adminEmail))
+
+                if (userList.Email.Equals(userEmail))
                 {
-                              
+                    userList.IsBlocked = true;
+                    _bankRepository.BlockUser(userList);
                 }
             }
-            return true;
         }
         #endregion
 
