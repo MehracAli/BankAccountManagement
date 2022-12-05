@@ -377,7 +377,11 @@ namespace LayiheEsas.Services
             {
                 if (userList.Email.Equals(email) || userList.Password.Equals(password))
                 {
-                    return true;
+                    
+                    if (userList.IsBlocked)
+                    {
+                        return true;
+                    }
                 }
 
                 Console.WriteLine("You aren't admin...");
