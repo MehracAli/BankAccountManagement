@@ -24,7 +24,7 @@ namespace LayiheEsas.Repositories
             bank.Users[bank.Users.Length - 1] = user;
             Console.WriteLine(" ");
             Console.WriteLine("You have successfully registered!");
-            Thread.Sleep(3000);
+            Thread.Sleep(1500);
         }
 
         #endregion

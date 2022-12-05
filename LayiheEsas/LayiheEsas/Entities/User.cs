@@ -23,11 +23,11 @@ namespace LayiheEsas.Entities
 
         string _password;
         public string Password { get { return _password; } set { _password = value; } }
+        static int count;
         int _id;
-        public int Id { get { return _id; } set { _id = ++count; } }
+        public int Id { get { return _id; } set { _id = value; } }
         public double Balance;
         public bool IsAdmin, IsBlocked, IsLogged;
-        static int count;
 
         public User(string name, string surname, string email, string password, bool isAdmin)
         {
@@ -37,15 +37,10 @@ namespace LayiheEsas.Entities
             Email = email;
             Password = password;
             Balance = default;
-        }
-
-        public User()
-        {
             count = 10;
             Id = ++count;
             IsBlocked = false;
             IsLogged = false;
         }
-
     }
 }
